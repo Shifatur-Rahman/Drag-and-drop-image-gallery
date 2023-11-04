@@ -50,30 +50,19 @@ export default DisplayProduct
 
 const gridStyle = makeStyles({
     root: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
-      gap: "10px"
+        margin: "10px",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+        gap: "10px"
     },
     item: {
-      border: "1px solid #bdc3c7",
-      borderRadius: "10px"
+        border: "1px solid #bdc3c7",
+        borderRadius: "10px"
     },
     image: {
-      width: "100%",
-      height: "100%",
-      pointerEvents: "none",
-      borderRadius: "10px"
+        width: "100%",
+        height: "100%",
+        borderRadius: "10px"
     },
-    button: {
-      position: "absolute",
-      bottom: 0,
-      right: 0
-    },
-    dragged: {
-      boxShadow:
-        "0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12)",
-      "& button": {
-        opacity: 0
-      }
-    }
+    
   });
