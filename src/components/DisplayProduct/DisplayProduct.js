@@ -15,18 +15,15 @@ const DisplayProduct = () => {
     
   return (
     <>
-    
-
     <SortableList
       onSortEnd={onSortEnd}
       className={classes.root}
       draggedItemClassName={classes.dragged}
     >
-      {items.map(({ id, thumb }) => (
+      {items.map(({ id, thumb },index) => (
         <SortableItem key={id}>
-          <div 
-          className={classes.item}
-          // className='single_product'
+          <div className={`${classes.item} ${index === 0 ? classes.firstItem : ''}`}
+          // className={classes.item}
           >
             <img
               className={classes.image}
@@ -39,30 +36,30 @@ const DisplayProduct = () => {
       ))}
     </SortableList>
 
-
-
     </>
   )
 }
 
 export default DisplayProduct
 
-
 const gridStyle = makeStyles({
-    root: {
-        margin: "10px",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
-        gap: "10px"
-    },
-    item: {
-        border: "1px solid #bdc3c7",
-        borderRadius: "10px"
-    },
-    image: {
-        width: "100%",
-        height: "100%",
-        borderRadius: "10px"
-    },
-    
-  });
+  firstItem: {
+    gridTemplateColumns: "2fr",
+    gridTemplateRows: "2fr"
+  },
+  root: {
+    margin: "10px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+    gap: "10px"
+  },
+  item: {
+    border: "1px solid #bdc3c7",
+    borderRadius: "10px"
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: "10px"
+  }
+});

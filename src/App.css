@@ -1,5 +1,9 @@
-/* .grab {cursor: -webkit-grab; cursor: grab;} */
-
 body{
   cursor: grab;
+}
+
+.firstItem {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  /* Add any other styles for the first item */
 }
