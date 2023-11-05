@@ -26,7 +26,8 @@ const DisplayProduct = () => {
           // className={classes.item}
           >
             <img
-              className={classes.image}
+              // className={classes.image}
+              className={`${classes.image} ${index === 0 ? classes.firstImage : ''}`}
               alt={id}
               src={thumb}
               imgProps={{ draggable: false }}
@@ -43,10 +44,10 @@ const DisplayProduct = () => {
 export default DisplayProduct
 
 const gridStyle = makeStyles({
-  firstItem: {
-    gridTemplateColumns: "2fr",
-    gridTemplateRows: "2fr"
-  },
+  // firstItem: {
+  //   gridTemplateColumns: "2fr",
+  //   gridTemplateRows: "2fr"
+  // },
   root: {
     margin: "10px",
     display: "grid",
@@ -61,5 +62,13 @@ const gridStyle = makeStyles({
     width: "100%",
     height: "100%",
     borderRadius: "10px"
-  }
+  },
+  firstItem: {
+    gridRowStart: 1,
+    gridRowEnd: 3,
+    gridColumnStart: 1,
+    gridColumnEnd: 3 
+      /* grid-row-start: 1;
+            grid-row-end: 3; */
+  },
 });
