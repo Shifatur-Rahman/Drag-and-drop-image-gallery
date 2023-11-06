@@ -6,8 +6,9 @@ import allProducts from "../../Data/Product.js"
 
 const DisplayProduct = () => {
 
-  //  const classes = gridStyle();
     const [items, setItems] = useState(allProducts);
+    const [selectedCount, setSelectedCount] = useState(0);
+
 
     const onSortEnd = (oldIndex, newIndex) => {
         setItems((array) => arrayMove(array, oldIndex, newIndex));
@@ -18,22 +19,35 @@ const DisplayProduct = () => {
   }
 
   const handleChange = (e) =>{
-    const {id} = e.target;
-    console.log(id);
-  }
+    const id = e.target.id;
+    const isChecked = e.target.checked;
+  
+    if (isChecked) {
+      setSelectedCount((prevCount) => prevCount + 1);
+    } else {
+      setSelectedCount((prevCount) => prevCount - 1);
+    }    
+  }   
 
   return (
     <>
-    <p className='title'>Gallery</p>
+    <div style={{margin:"20px"}} className='header'>
+    
+    {
+      selectedCount==0?<span className='title'>Gallery</span>:<span className='title'><input type="checkbox" checked />{selectedCount} Items Selected</span>
+    }
+    {
+      selectedCount>0? <button style={{color:"red"}}>Delete</button>:""
+    }
+    </div>
+    
     <hr />
     <SortableList
       onSortEnd={onSortEnd}
       className="sort-gallery"
-    //  draggedItemClassName={classes.dragged}
     >
       {items.map(({ id, thumb },index) => (
         <SortableItem key={id}>
-          {/* <div className={`${classes.item} ${index === 0 ? classes.firstItem : ''}`} */}
           <div className={`item ${index === 0 ? "firstItem" : ''}`}
           onClick={handleSelect(id)}
           >
