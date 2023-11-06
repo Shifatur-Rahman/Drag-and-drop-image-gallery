@@ -37,20 +37,26 @@ const DisplayProduct = () => {
   return (
     <>
       <div style={{ margin: "20px" }} className='header'>
-
+              {/* Count Function */}
         {
-          selectedCount == 0 ? <span className='title'>Gallery</span> : <span className='title'><input type="checkbox" checked />{selectedCount} Items Selected</span>
+          selectedCount === 0 ? <span className='title'>Gallery</span> : <span className='title'><input type="checkbox" checked />{selectedCount} Items Selected</span>
         }
+              {/* Delete Function */}
         {
           selectedCount > 0 ? <button onClick={handleDeleteSelected} style={{ color: "red" }}>Delete</button> : ""
         }
       </div>
 
       <hr />
+
+              {/* Image sorting */}
+      
       <SortableList
         onSortEnd={onSortEnd}
-        className="sort-gallery"
-      >
+        className="sort-gallery">
+
+        {/* All Product Image mapping */}
+
         {items.map(({ id, thumb }, index) => (
           <SortableItem key={id}>
             <div className={`item ${index === 0 ? "firstItem" : ''}`}>
