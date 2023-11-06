@@ -8,26 +8,46 @@ const DisplayProduct = () => {
 
     const [items, setItems] = useState(allProducts);
     const [selectedCount, setSelectedCount] = useState(0);
+    const [selectedItems, setSelectedItems] = useState([]);
 
 
     const onSortEnd = (oldIndex, newIndex) => {
         setItems((array) => arrayMove(array, oldIndex, newIndex));
     };
 
-  let handleSelect = (id) => {
-    console.log(id);
-  }
+  // const handleChange = (e) =>{
+  //   const id = e.target.id;
+  //   const isChecked = e.target.checked;
+  
+  //   if (isChecked) {
+  //     setSelectedCount((prevCount) => prevCount + 1);
+  //   } else {
+  //     setSelectedCount((prevCount) => prevCount - 1);
+  //   }    
+  // }   
 
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     const id = e.target.id;
     const isChecked = e.target.checked;
   
     if (isChecked) {
       setSelectedCount((prevCount) => prevCount + 1);
+      setSelectedItems((prevItems) => [...prevItems, id]);
     } else {
       setSelectedCount((prevCount) => prevCount - 1);
-    }    
-  }   
+      setSelectedItems((prevItems) => prevItems.filter((itemId) => itemId !== id));
+    }
+  };
+  
+
+
+  const handleDeleteSelected = () => {
+    const updatedItems = items.filter((item) => !selectedItems.includes(item.id));
+      setItems(updatedItems);
+      setSelectedItems([]);
+    setSelectedCount(0);
+  };
+  
 
   return (
     <>
@@ -37,7 +57,7 @@ const DisplayProduct = () => {
       selectedCount==0?<span className='title'>Gallery</span>:<span className='title'><input type="checkbox" checked />{selectedCount} Items Selected</span>
     }
     {
-      selectedCount>0? <button style={{color:"red"}}>Delete</button>:""
+      selectedCount>0? <button onClick={handleDeleteSelected} style={{color:"red"}}>Delete</button>:""
     }
     </div>
     
@@ -48,9 +68,7 @@ const DisplayProduct = () => {
     >
       {items.map(({ id, thumb },index) => (
         <SortableItem key={id}>
-          <div className={`item ${index === 0 ? "firstItem" : ''}`}
-          onClick={handleSelect(id)}
-          >
+          <div className={`item ${index === 0 ? "firstItem" : ''}`}>
             <img
               className="image"
               alt={id}
