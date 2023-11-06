@@ -32,3 +32,33 @@ body{
   grid-column-start: 1;
   grid-column-end: 3; 
 } */
+
+
+.image-checkbox {
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.image-container:hover .image-checkbox {
+  display: block;
+}
+
+.gallery-image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.selected {
+  border-color: #007BFF;
+}
+
+   /* next */
+
+.image-checkbox:checked{
+  visibility: visible;
+}
