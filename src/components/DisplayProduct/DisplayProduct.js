@@ -6,7 +6,7 @@ import allProducts from "../../Data/Product.js"
 
 const DisplayProduct = () => {
 
-    const classes = gridStyle();
+  //  const classes = gridStyle();
     const [items, setItems] = useState(allProducts);
 
     const onSortEnd = (oldIndex, newIndex) => {
@@ -16,8 +16,11 @@ const DisplayProduct = () => {
   let handleSelect = (id) => {
     console.log(id);
   }
-  
 
+  const handleChange = (e) =>{
+    const {id} = e.target;
+    console.log(id);
+  }
 
   return (
     <>
@@ -25,19 +28,26 @@ const DisplayProduct = () => {
     <hr />
     <SortableList
       onSortEnd={onSortEnd}
-      className={classes.root}
-      draggedItemClassName={classes.dragged}
+      className="sort-gallery"
+    //  draggedItemClassName={classes.dragged}
     >
       {items.map(({ id, thumb },index) => (
         <SortableItem key={id}>
-          <div className={`${classes.item} ${index === 0 ? classes.firstItem : ''}`}
+          {/* <div className={`${classes.item} ${index === 0 ? classes.firstItem : ''}`} */}
+          <div className={`item ${index === 0 ? "firstItem" : ''}`}
           onClick={handleSelect(id)}
           >
             <img
-              className={classes.image}
+              className="image"
               alt={id}
               src={thumb}
             />
+            <input 
+              type="checkbox"
+              className="image_checkbox"
+              id={id} 
+              onChange={handleChange}
+              />
             </div>
         </SortableItem>
       ))}
@@ -50,46 +60,47 @@ const DisplayProduct = () => {
 
 export default DisplayProduct
 
-const gridStyle = makeStyles({
-  root: {
-    margin: "10px",
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
-    gap: "10px"
-  },
-  item: {
-    border: "1px solid #bdc3c7",
-    borderRadius: "10px",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    borderRadius: "10px",
-    "&:hover": {
-      opacity: 0.2,
-      backgroundColor: "rgba(0,0,0,0.3)"
-    }
-  },
-  firstItem: {
-    gridRowStart: 1,
-    gridRowEnd: 3,
-    gridColumnStart: 1,
-    gridColumnEnd: 3 
-  },
-  imageCheckbox: {
-    display: "none",
-    position: "absolute",
-    top: "5px",
-    left: "5px"
-  },
-  imageContainer:{
-  "&:hover":{
-    display: "block"
+// const gridStyle = makeStyles({
+//   root: {
+//     margin: "10px",
+//     display: "grid",
+//     gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+//     gap: "10px"
+//   },
+//   item: {
+//     border: "1px solid #bdc3c7",
+//     borderRadius: "10px",
+//     position: "relative"
+//   },
+//   image: {
+//     width: "100%",
+//     height: "100%",
+//     borderRadius: "10px",
+//     "&:hover": {
+//       opacity: 0.2,
+//       backgroundColor: "rgba(0,0,0,0.3)"
+//     }
+//   },
+//   firstItem: {
+//     gridRowStart: 1,
+//     gridRowEnd: 3,
+//     gridColumnStart: 1,
+//     gridColumnEnd: 3 
+//   },
+//   imageContainer:{
+//   "&:hover":{
+//     display: "block"
 
-  }
-  } 
+//   }
+//   },
+//   image_checkbox: {
+//     position: "absolute",
+//     top: "5px",
+//     right: "5px",
+//     visibility: "hidden"
+//   }
   
-});
+// });
 
 
 // import React, { useState } from "react";
