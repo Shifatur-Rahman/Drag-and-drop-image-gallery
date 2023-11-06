@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import SortableList, { SortableItem } from "react-easy-sort";
 import arrayMove from "array-move";
-import { makeStyles } from "@material-ui/core";
 import allProducts from "../../Data/Product.js"
 
 const DisplayProduct = () => {
@@ -11,25 +10,14 @@ const DisplayProduct = () => {
     const [selectedItems, setSelectedItems] = useState([]);
 
 
-    const onSortEnd = (oldIndex, newIndex) => {
-        setItems((array) => arrayMove(array, oldIndex, newIndex));
-    };
-
-  // const handleChange = (e) =>{
-  //   const id = e.target.id;
-  //   const isChecked = e.target.checked;
-  
-  //   if (isChecked) {
-  //     setSelectedCount((prevCount) => prevCount + 1);
-  //   } else {
-  //     setSelectedCount((prevCount) => prevCount - 1);
-  //   }    
-  // }   
+  const onSortEnd = (oldIndex, newIndex) => {
+    setItems((array) => arrayMove(array, oldIndex, newIndex));
+  };
 
   const handleChange = (e) => {
     const id = e.target.id;
     const isChecked = e.target.checked;
-  
+
     if (isChecked) {
       setSelectedCount((prevCount) => prevCount + 1);
       setSelectedItems((prevItems) => [...prevItems, id]);
@@ -38,53 +26,50 @@ const DisplayProduct = () => {
       setSelectedItems((prevItems) => prevItems.filter((itemId) => itemId !== id));
     }
   };
-  
-
 
   const handleDeleteSelected = () => {
     const updatedItems = items.filter((item) => !selectedItems.includes(item.id));
-      setItems(updatedItems);
-      setSelectedItems([]);
+    setItems(updatedItems);
+    setSelectedItems([]);
     setSelectedCount(0);
   };
-  
 
   return (
     <>
-    <div style={{margin:"20px"}} className='header'>
-    
-    {
-      selectedCount==0?<span className='title'>Gallery</span>:<span className='title'><input type="checkbox" checked />{selectedCount} Items Selected</span>
-    }
-    {
-      selectedCount>0? <button onClick={handleDeleteSelected} style={{color:"red"}}>Delete</button>:""
-    }
-    </div>
-    
-    <hr />
-    <SortableList
-      onSortEnd={onSortEnd}
-      className="sort-gallery"
-    >
-      {items.map(({ id, thumb },index) => (
-        <SortableItem key={id}>
-          <div className={`item ${index === 0 ? "firstItem" : ''}`}>
-            <img
-              className="image"
-              alt={id}
-              src={thumb}
-            />
-            <input 
-              type="checkbox"
-              className="image_checkbox"
-              id={id} 
-              onChange={handleChange}
+      <div style={{ margin: "20px" }} className='header'>
+
+        {
+          selectedCount == 0 ? <span className='title'>Gallery</span> : <span className='title'><input type="checkbox" checked />{selectedCount} Items Selected</span>
+        }
+        {
+          selectedCount > 0 ? <button onClick={handleDeleteSelected} style={{ color: "red" }}>Delete</button> : ""
+        }
+      </div>
+
+      <hr />
+      <SortableList
+        onSortEnd={onSortEnd}
+        className="sort-gallery"
+      >
+        {items.map(({ id, thumb }, index) => (
+          <SortableItem key={id}>
+            <div className={`item ${index === 0 ? "firstItem" : ''}`}>
+              <img
+                className="image"
+                alt={id}
+                src={thumb}
+              />
+              <input
+                type="checkbox"
+                className="image_checkbox"
+                id={id}
+                onChange={handleChange}
               />
             </div>
-        </SortableItem>
-      ))}
-            
-    </SortableList>
+          </SortableItem>
+        ))}
+
+      </SortableList>
 
     </>
   )
